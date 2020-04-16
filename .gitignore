@@ -52,6 +52,6 @@ Mkfile.old
 dkms.conf
 
 # ngxfmt.py
-nginxfmt.py
+ngxfmt.py
 
 .idea
