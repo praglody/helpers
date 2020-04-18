@@ -53,5 +53,10 @@ dkms.conf
 
 # ngxfmt.py
 ngxfmt.py
+v2ray/client.json
+v2ray/server.json
+v2ray/client_release.yaml
+v2ray/server_release.yaml
+v2ray/nginx.conf
 
 .idea
