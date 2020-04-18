@@ -4,7 +4,7 @@ set -e
 set -x
 
 urls=(
-    "https://nginx.org/download/nginx-1.16.1.tar.gz"
+    "https://openresty.org/download/openresty-1.15.8.3.tar.gz"
     "http://zlib.net/zlib-1.2.11.tar.gz"
     "https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz"
     "https://www.openssl.org/source/openssl-1.1.1f.tar.gz"
@@ -20,8 +20,8 @@ fi
 
 is_set_user=$(grep '^www:' /etc/passwd|wc -l)
 if [ $is_set_user -eq 0 ]; then
-    groupadd  www 
-    useradd -g www -M -s /sbin/nologin www 
+    groupadd  www
+    useradd -g www -M -s /sbin/nologin www
 fi
 
 # 建立日志文件夹
@@ -31,7 +31,7 @@ if [ $(cat /etc/issue|grep -i ubuntu|wc -l) -gt 0 ]; then
     os="ubuntu"
 elif [ $(cat /etc/issue|grep -i debian|wc -l) -gt 0 ]; then
     os="debian"
-elif [ $(cat /etc/centos-relesae|grep -i centos|wc -l) -gt 0 ]; then
+elif which yum > /dev/null; then
     os="centos"
 else
     os=""
@@ -49,12 +49,12 @@ case $os in
         exit 1
 esac
 
-if [ -d /usr/local/nginx ]; then
-   echo "nginx already installed!"
+if [ -d /usr/local/openresty ]; then
+   echo "openresty already installed!"
    #exit 1
 fi
 
-work_dir="/usr/local/src/install_nginx"
+work_dir="/usr/local/src/install_openresty"
 if [ ! -d $work_dir ]; then
     mkdir -p $work_dir
 fi
@@ -69,19 +69,23 @@ ls | grep -v 'tar.gz' | xargs -i rm -rf {}
 ls | xargs -i tar zxf {}
 ls | grep -v 'tar.gz' | awk -F'-' '{print "mv "$0" "$1}' | bash
 
-cd nginx
+cd openresty
 ./configure --user=www --group=www \
-    --prefix=/usr/local/nginx \
-    --with-http_ssl_module \
+    --prefix=/usr/local/openresty \
+    --with-http_iconv_module \
     --with-http_realip_module \
-    --with-pcre=../pcre \
+    --with-http_flv_module \
+    --with-http_mp4_module \
+    --with-http_stub_status_module \
+    --with-http_ssl_module \
+    --with-http_v2_module \
+    --with-http_gzip_static_module \
+    --with-http_sub_module \
+    --with-stream --with-stream_ssl_module \
+    --with-stream_realip_module \
+    --with-pcre=../pcre --with-pcre-jit \
     --with-zlib=../zlib \
-    --with-openssl=../openssl \
-    --with-stream \
-    --with-stream_ssl_preread_module \
-    --with-stream_ssl_module \
-    --with-pcre-jit
+    --with-openssl=../openssl
 make && make install
 
-ln -sf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
-
+ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/local/bin/openresty
