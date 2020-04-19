@@ -1,30 +1,32 @@
 #! /bin/bash
 
-stop()
-{
-	pid=$(ps -ef|grep 'v2ray -config'|grep -v grep|awk '{print $2}')
-	if [ "x$pid" != "x" ]; then
-		kill $pid
-		sleep 1
-	fi
+stop() {
+  pid=$(ps -ef | grep 'v2ray -config' | grep -v grep | awk '{print $2}')
+  if [ "x$pid" != "x" ]; then
+    kill $pid
+    sleep 1
+  fi
 }
 
-start()
-{
-	stop
-	nohup /data/software/v2ray/v2ray -config /data/software/v2ray/client.json >/dev/null 2>&1 &
-	echo "v2ray is started"
+start() {
+  pid=$(ps -ef | grep 'v2ray -config' | grep -v grep | awk '{print $2}')
+  if [ "x$pid" != "x" ]; then
+    return 0
+  fi
+  nohup /data/software/v2ray/v2ray -config /data/software/v2ray/client.json >/dev/null 2>&1 &
 }
 
 case "$1" in
-start|restart|reload)
-	start
-;;
+start | restart | reload)
+  start
+  echo "v2ray is started"
+  ;;
 stop)
-	stop
-	echo "v2ray is stoped"
-;;
+  stop
+  echo "v2ray is stoped"
+  ;;
 *)
   self_name=$(basename $0)
-	echo "Usage: service $self_name {start|stop|reload|restart}"
+  echo "Usage: service $self_name {start|stop|reload|restart}"
+  ;;
 esac
