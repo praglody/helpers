@@ -17,9 +17,14 @@ start() {
 }
 
 case "$1" in
-start | restart | reload)
+start)
   start
   echo "v2ray is started"
+  ;;
+restart | reload)
+  stop
+  start
+  echo "v2ray is restarted"
   ;;
 stop)
   stop
