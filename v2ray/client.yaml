@@ -32,5 +32,10 @@ outbounds:
       security: tls
       wsSettings:
         path: /check_server_status
+        connectionReuse: true
+        headers:
+          Host: yourdomain
       tlsSettings:
         serverName: yourdomain
+        allowInsecure: false
+        
