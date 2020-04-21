@@ -21,3 +21,4 @@ set background=dark
 "colorscheme monokai
 
 set hlsearch
+set mouse=v                 "允许鼠标选中
