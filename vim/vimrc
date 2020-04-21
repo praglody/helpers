@@ -9,7 +9,7 @@ set autoindent
 set nocompatible   "禁用兼容模式
 
 " 设置底部的状态栏
-set statusline=\%<%F[%1*%M%*%n%R%H]%=\%y\%0(%{&fileformat}/\%{&encoding}/\%c:%l/%L%)\
+set statusline=%F%m%r%h%w%=\ [ft=%Y]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [ff=%{&ff}]\ [asc=%03.3b]\ [hex=%02.2B]\ [pos=%04l,%04v][%p%%]\ [len=%L]
 set laststatus=2
 
 set smartindent
