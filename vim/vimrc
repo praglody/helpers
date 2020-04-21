@@ -1,4 +1,6 @@
-set mouse=v
+set mouse=v             "允许鼠标选中
+set pastetoggle=<F10>   "按F10进入粘贴模式，再按一次取消
+set backspace=2         "解决删除键在插入模式下不可用的问题
 
 set nu
 set nobackup
@@ -21,4 +23,4 @@ set background=dark
 "colorscheme monokai
 
 set hlsearch
-set mouse=v                 "允许鼠标选中
+
