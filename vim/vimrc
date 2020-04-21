@@ -1,0 +1,23 @@
+set mouse=v
+
+set nu
+set nobackup
+set ruler
+set autoindent
+set nocompatible   "禁用兼容模式
+
+" 设置底部的状态栏
+set statusline=\%<%F[%1*%M%*%n%R%H]%=\%y\%0(%{&fileformat}/\%{&encoding}/\%c:%l/%L%)\
+set laststatus=2
+
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab       "将tab转成space
+set softtabstop=4
+
+syntax enable
+set background=dark
+"colorscheme monokai
+
+set hlsearch
