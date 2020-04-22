@@ -2,6 +2,10 @@ set mouse=v             "允许鼠标选中
 set pastetoggle=<F10>   "按F10进入粘贴模式，再按一次取消
 set backspace=2         "解决删除键在插入模式下不可用的问题
 
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,latin1
+
 set nu
 set nobackup
 set ruler
