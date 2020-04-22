@@ -16,6 +16,7 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab       "将tab转成space
+autocmd FileType make set noexpandtab
 set softtabstop=4
 
 syntax enable
