@@ -9,13 +9,16 @@ set fileencodings=ucs-bom,utf-8,latin1
 set nu
 set nobackup
 set ruler
+set cc=80           "设置80个字符分界线
+set wrap            "文字自动折行
 set autoindent
-set nocompatible   "禁用兼容模式
+set nocompatible    "禁用兼容模式
 
 " 设置底部的状态栏
 set statusline=%F%m%r%h%w%=\ [ft=%Y]\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [ff=%{&ff}]\ [asc=%03.3b]\ [hex=%02.2B]\ [pos=%04l,%04v][%p%%]\ [len=%L]
 set laststatus=2
 
+filetype on
 set smartindent
 set tabstop=4
 set shiftwidth=4
