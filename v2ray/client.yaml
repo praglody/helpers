@@ -6,6 +6,19 @@ inbounds:
   - port: 14213
     listen: 0.0.0.0
     protocol: socks
+    tag: aliyun
+    settings:
+      udp: true
+      auth: noauth
+    sniffing:
+      enabled: true
+      destOverride:
+        - http
+        - tls
+  - port: 14214
+    listen: 0.0.0.0
+    protocol: socks
+    tag: google_cloud
     settings:
       udp: true
       auth: noauth
@@ -15,8 +28,40 @@ inbounds:
         - http
         - tls
 
+
+routing:
+  rules:
+    - type: field
+      inboundTag:
+        - google_cloud
+      outboundTag: google_cloud_server
+
+
 outbounds:
   - protocol: vmess
+    mux:
+      enabled: true
+      concurrency: 8
+    settings: 
+      vnext:
+        - address: yourdomain
+          port: 443
+          users:
+            - id: 121b3a13-ec16-4acc-9098-3bbef8ed2343
+              alterId: 64
+    streamSettings:
+      network: ws
+      security: tls
+      wsSettings:
+        path: /check_server_status
+        connectionReuse: true
+        headers:
+          Host: yourdomain
+      tlsSettings:
+        serverName: yourdomain
+        allowInsecure: false
+  - protocol: vmess
+    tag: google_cloud_server
     mux:
       enabled: true
       concurrency: 8
