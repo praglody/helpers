@@ -89,3 +89,4 @@ cd openresty
 make && make install
 
 ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/local/bin/openresty
+ln -sf /usr/local/openresty/bin/resty /usr/local/bin/resty
