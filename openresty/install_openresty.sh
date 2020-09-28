@@ -4,7 +4,7 @@ set -e
 set -x
 
 urls=(
-    "https://openresty.org/download/openresty-1.15.8.3.tar.gz"
+    "https://openresty.org/download/openresty-1.17.8.2.tar.gz"
     "http://zlib.net/zlib-1.2.11.tar.gz"
     "http://mirror.wibliss.com/pcre-8.44.tar.gz"
     "http://mirror.wibliss.com/openssl-1.1.1f.tar.gz"
